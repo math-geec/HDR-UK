@@ -1,0 +1,25 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Laravel / PHP
+/backend/vendor/
+/vendor/
+.env
+.env.*
+/backend/.env
+/backend/.env.*
+/bootstrap/cache/
+/storage/*.key
+/storage/debugbar
+/storage/*.log
+/storage/framework/cache/data/
+
+# Build output
+/frontend/.next/
+
+# Misc
+.idea/
+.vscode/
+.DS_Store
