@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`EventList Snapshot matches snapshot 1`] = `
+<div>
+  <div
+    class="space-y-4"
+  >
+    <div
+      class="p-4 border rounded shadow-sm flex justify-between items-center"
+    >
+      <div>
+        <h2
+          class="text-lg font-semibold"
+        >
+          Snapshot Event
+        </h2>
+        <p
+          class="text-sm text-gray-500"
+        >
+          2025-02-01
+        </p>
+        <p
+          class="text-sm mt-1"
+        >
+          Registrations: 
+          <strong>
+            3
+          </strong>
+        </p>
+      </div>
+      <div
+        class="flex gap-2"
+      >
+        <button
+          class="px-4 py-2 bg-green-600 text-white rounded"
+        >
+          Register
+        </button>
+        <button
+          class="px-4 py-2 bg-red-600 text-white rounded"
+        >
+          Leave
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

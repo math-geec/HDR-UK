@@ -52,7 +52,11 @@ php artisan serve --port=8000
 
 The API base will be `http://localhost:8000/api`.
 
-MySQL (if preferred): set `DB_CONNECTION=mysql` and provide `DB_HOST`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` in `backend/.env`, then run migrations and seed as above.
+1. Unit tests:
+
+```bash
+php artisan test
+```
 
 Notes:
 - For local development with PHP 8.5 you may see a deprecation warning about `PDO::MYSQL_ATTR_SSL_CA`. This repository suppresses E_DEPRECATED at the CLI and HTTP entry points to avoid noisy startup messages (`backend/artisan` and `backend/public/index.php`). This is a development convenience — in production prefer upgrading vendor code or adjusting PHP error reporting centrally.
@@ -91,6 +95,12 @@ npm run dev
 
 The UI uses optimistic updates so it updates immediately on Register/Leave. If the server returns an error the UI will refetch the current state.
 
+4. Frontend tests:
+
+```bash
+npm test
+``` 
+
 **Troubleshooting**
 - 404 when the frontend fetches `/api/events`:
   - Ensure the backend is running (`php artisan serve --port=8000`).
@@ -110,8 +120,6 @@ php artisan db:seed
 php artisan migrate:fresh --seed
 ```
 
-- CORS: if the browser blocks requests, enable or configure CORS in `backend/config/cors.php` (or allow requests from the frontend origin during local development).
-
 ---
 ## AI Tooling
  ChatGPT web free guest version (model ) has been used to assist in refining code and documentation within this project.
@@ -124,3 +132,4 @@ php artisan migrate:fresh --seed
  - http://localhost:8000/api/events 404, how to fix on backend
  - how should web.php look like
  - add Tests (PHPUnit for backend, Jest for frontend)
+ - POST requests + SWR, how to achieve multi-user realtime sync
