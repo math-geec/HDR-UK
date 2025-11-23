@@ -10,9 +10,9 @@ class EventSeeder extends Seeder
     public function run(): void
     {
         $events = [
-            ['name' => 'Internal Townhall', 'date' => now()->addDays(3)->toDateString(), 'registration_count' => 2, 'max_registrations' => 100],
-            ['name' => 'Tech Lunch & Learn', 'date' => now()->addDays(7)->toDateString(), 'registration_count' => 5, 'max_registrations' => 20],
-            ['name' => 'Quarterly Review', 'date' => now()->addDays(30)->toDateString(), 'registration_count' => 0, 'max_registrations' => null],
+            ['name' => 'Business Update', 'date' => now()->addDays(3)->toDateString(), 'registration_count' => 2, 'max_registrations' => 100],
+            ['name' => 'Team Lunch', 'date' => now()->addDays(7)->toDateString(), 'registration_count' => 5, 'max_registrations' => 20],
+            ['name' => 'Team Fun', 'date' => now()->addDays(30)->toDateString(), 'registration_count' => 0, 'max_registrations' => null],
         ];
 
         foreach ($events as $ev) {
