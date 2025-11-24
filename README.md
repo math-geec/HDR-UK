@@ -1,8 +1,8 @@
-# HDR-UK — Event Registration (Internal)
+# HDR-UK — Event Registration
 
 This repository contains a small example application to track event registrations for internal users. It uses a Laravel backend (API) and a Next.js single-page frontend.
 
-**Project Structure**
+### Project Structure
 - `backend/`: Laravel application (API server)
   - `app/Models/Event.php` — Event model
   - `app/Http/Controllers/EventController.php` — API controller (list/register/leave)
@@ -16,7 +16,7 @@ This repository contains a small example application to track event registration
   - `package.json` — frontend dependencies and scripts
 - `.gitignore` — ignores `vendor`, `node_modules`, `.env` and build artifacts
 
-**Quick Start**
+## Quick Start
 
 1. Start the backend server:
 
@@ -32,7 +32,7 @@ npm run dev
 ```
 3. Open `http://localhost:3000` in your browser.
 
-**Backend (Laravel) from Sratch**
+## Backend (Laravel) from Sratch
 
 The backend can run using SQLite (recommended for quick local testing) or MySQL.
 
@@ -74,9 +74,8 @@ The API base will be `http://localhost:8000/api`.
 php artisan test
 ```
 
-Notes:
-- For local development with PHP 8.5 you may see a deprecation warning about `PDO::MYSQL_ATTR_SSL_CA`. This repository suppresses E_DEPRECATED at the CLI and HTTP entry points to avoid noisy startup messages (`backend/artisan` and `backend/public/index.php`). This is a development convenience — in production prefer upgrading vendor code or adjusting PHP error reporting centrally.
-- Seeding is idempotent: the seeders use `firstOrCreate` to avoid unique constraint failures when run multiple times.
+**Notes:**
+For local development with PHP 8.5 you may see a deprecation warning about `PDO::MYSQL_ATTR_SSL_CA`. This repository suppresses E_DEPRECATED at the CLI and HTTP entry points to avoid noisy startup messages (`backend/artisan` and `backend/public/index.php`). This is a development convenience — in production prefer upgrading vendor code or adjusting PHP error reporting centrally.
 
 **API Endpoints**
 - `GET /api/events` — list events (JSON)
@@ -85,7 +84,7 @@ Notes:
 
 All endpoints return JSON and use HTTP status codes for errors (400/404).
 
-**Frontend (Next.js) from Scratch**
+## Frontend (Next.js) from Scratch
 
 1. In a new terminal, open the frontend folder:
 
@@ -117,7 +116,7 @@ The UI uses optimistic updates so it updates immediately on Register/Leave. If t
 npm test
 ``` 
 
-**Troubleshooting**
+## Troubleshooting
 - 404 when the frontend fetches `/api/events`:
   - Ensure the backend is running (`php artisan serve --port=8000`).
   - Verify routes with:
@@ -136,10 +135,10 @@ php artisan db:seed
 php artisan migrate:fresh --seed
 ```
 
----
+
 ## AI Tooling
- ChatGPT web free guest version (model ) has been used to assist in refining code and documentation within this project.
- Prompt used:
+ ChatGPT web free guest version (model GPT-5.1) has been used to assist in refining code and documentation within this project.
+ Prompts used:
  - command to setup a laravel backend project
  - command to setup a nextjs frontend project
  - what is SWR
