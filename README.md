@@ -133,3 +133,4 @@ php artisan migrate:fresh --seed
  - how should web.php look like
  - add Tests (PHPUnit for backend, Jest for frontend)
  - POST requests + SWR, how to achieve multi-user realtime sync
+ - add logging to handle info and errors

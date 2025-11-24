@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useEvents, registerEvent, leaveEvent } from "@/lib/api";
 import { bc } from "@/lib/broadcast";
+import { logger } from "@/lib/logger";
 
 export default function EventList() {
   const { data: events, mutate, isLoading } = useEvents();
@@ -11,14 +12,20 @@ export default function EventList() {
   useEffect(() => {
     if (!bc) return;
 
-    bc.onmessage = (msg) => {
+    bc.onmessage = async (msg) => {
+      logger.info("BroadcastChannel message received", { data: msg.data });
       if (msg.data === "events-updated") {
-        mutate(); // instantly refresh event list
+        try {
+          await mutate(); // instantly refresh event list
+          logger.info("Mutated events after broadcast");
+        } catch (err: any) {
+          logger.error("Failed to mutate events after broadcast", { error: err?.message });
+        }
       }
     };
 
     return () => {
-      bc.close();
+      bc?.close();
     };
   }, [mutate]);
 
@@ -41,8 +48,15 @@ export default function EventList() {
           <div className="flex gap-2">
             <button
               onClick={async () => {
-                await registerEvent(event.id);
-                mutate(); // instant local update
+                try {
+                  logger.info('Register button clicked', { eventId: event.id });
+                  await registerEvent(event.id);
+                  await mutate(); // instant local update
+                } catch (err: any) {
+                  logger.error('Register failed in UI', { eventId: event.id, error: err?.message });
+                  // Minimal user feedback — can replace with a toast
+                  alert('Failed to register for event: ' + (err?.message || 'unknown'));
+                }
               }}
               className="px-4 py-2 bg-green-600 text-white rounded"
             >
@@ -51,8 +65,14 @@ export default function EventList() {
 
             <button
               onClick={async () => {
-                await leaveEvent(event.id);
-                mutate();
+                try {
+                  logger.info('Leave button clicked', { eventId: event.id });
+                  await leaveEvent(event.id);
+                  await mutate();
+                } catch (err: any) {
+                  logger.error('Leave failed in UI', { eventId: event.id, error: err?.message });
+                  alert('Failed to leave event: ' + (err?.message || 'unknown'));
+                }
               }}
               className="px-4 py-2 bg-red-600 text-white rounded"
             >
