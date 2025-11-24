@@ -150,3 +150,7 @@ php artisan migrate:fresh --seed
  - POST requests + SWR, how to achieve multi-user realtime sync
  - add logging to handle info and errors
  - add global toast message when user register or leave an event successfully
+
+## Next Steps
+- Add user authentication (e.g. Laravel Sanctum + NextAuth.js)
+- Make sure user can only register/leave once per event
