@@ -16,7 +16,23 @@ This repository contains a small example application to track event registration
   - `package.json` — frontend dependencies and scripts
 - `.gitignore` — ignores `vendor`, `node_modules`, `.env` and build artifacts
 
-**Quick Start — Backend (Laravel)**
+**Quick Start**
+
+1. Start the backend server:
+
+```bash
+cd backend
+php artisan serve --port=8000
+```
+2. Start the frontend server:
+
+```bash
+cd frontend
+npm run dev
+```
+3. Open `http://localhost:3000` in your browser.
+
+**Backend (Laravel) from Sratch**
 
 The backend can run using SQLite (recommended for quick local testing) or MySQL.
 
@@ -52,7 +68,7 @@ php artisan serve --port=8000
 
 The API base will be `http://localhost:8000/api`.
 
-1. Unit tests:
+5. Unit tests:
 
 ```bash
 php artisan test
@@ -69,7 +85,7 @@ Notes:
 
 All endpoints return JSON and use HTTP status codes for errors (400/404).
 
-**Quick Start — Frontend (Next.js)**
+**Frontend (Next.js) from Scratch**
 
 1. In a new terminal, open the frontend folder:
 
@@ -134,3 +150,4 @@ php artisan migrate:fresh --seed
  - add Tests (PHPUnit for backend, Jest for frontend)
  - POST requests + SWR, how to achieve multi-user realtime sync
  - add logging to handle info and errors
+ - add global toast message when user register or leave an event successfully

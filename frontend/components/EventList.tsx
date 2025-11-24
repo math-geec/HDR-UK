@@ -4,9 +4,11 @@ import { useEffect } from "react";
 import { useEvents, registerEvent, leaveEvent } from "@/lib/api";
 import { bc } from "@/lib/broadcast";
 import { logger } from "@/lib/logger";
+import { useToast } from "@/components/ToastProvider";
 
 export default function EventList() {
   const { data: events, mutate, isLoading } = useEvents();
+  const { show } = useToast();
 
   // Listen for "events-updated" message from other tabs
   useEffect(() => {
@@ -50,12 +52,18 @@ export default function EventList() {
               onClick={async () => {
                 try {
                   logger.info('Register button clicked', { eventId: event.id });
-                  await registerEvent(event.id);
+                  const body = await registerEvent(event.id);
                   await mutate(); // instant local update
+                  const cnt = body?.registration_count ?? null;
+                  show('success', cnt !== null ? `Registered — ${cnt} registered` : 'Registered');
                 } catch (err: any) {
                   logger.error('Register failed in UI', { eventId: event.id, error: err?.message });
-                  // Minimal user feedback — can replace with a toast
-                  alert('Failed to register for event: ' + (err?.message || 'unknown'));
+                  const msg = err?.message || 'Failed to register';
+                  if (msg.toLowerCase().includes('full')) {
+                    show('error', 'Event is full — maximum members reached');
+                  } else {
+                    show('error', `Failed to register: ${msg}`);
+                  }
                 }
               }}
               className="px-4 py-2 bg-green-600 text-white rounded"
@@ -67,11 +75,18 @@ export default function EventList() {
               onClick={async () => {
                 try {
                   logger.info('Leave button clicked', { eventId: event.id });
-                  await leaveEvent(event.id);
+                  const body = await leaveEvent(event.id);
                   await mutate();
+                  const cnt = body?.registration_count ?? null;
+                  show('success', cnt !== null ? `Left event — ${cnt} registered` : 'Left event');
                 } catch (err: any) {
                   logger.error('Leave failed in UI', { eventId: event.id, error: err?.message });
-                  alert('Failed to leave event: ' + (err?.message || 'unknown'));
+                  const msg = err?.message || 'Failed to leave';
+                  if (msg.toLowerCase().includes('no registrations') || msg.toLowerCase().includes('no registration')) {
+                    show('error', "Can't leave — you're not registered for this event");
+                  } else {
+                    show('error', `Failed to leave: ${msg}`);
+                  }
                 }
               }}
               className="px-4 py-2 bg-red-600 text-white rounded"

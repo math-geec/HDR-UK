@@ -11,8 +11,8 @@ class EventSeeder extends Seeder
     {
         $events = [
             ['name' => 'Business Update', 'date' => now()->addDays(3)->toDateString(), 'registration_count' => 2, 'max_registrations' => 100],
-            ['name' => 'Team Lunch', 'date' => now()->addDays(7)->toDateString(), 'registration_count' => 5, 'max_registrations' => 20],
-            ['name' => 'Team Fun', 'date' => now()->addDays(30)->toDateString(), 'registration_count' => 0, 'max_registrations' => null],
+            ['name' => 'Team Lunch', 'date' => now()->addDays(7)->toDateString(), 'registration_count' => 5, 'max_registrations' => 10],
+            ['name' => 'Team Fun', 'date' => now()->addDays(30)->toDateString(), 'registration_count' => 0, 'max_registrations' => 10],
         ];
 
         foreach ($events as $ev) {
